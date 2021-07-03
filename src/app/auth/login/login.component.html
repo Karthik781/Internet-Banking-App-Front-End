@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="card mt-4">
+        <form [formGroup] = "loginForm" (ngSubmit)="logIn()"> 
+        <div class="card-header bg-primary text-white display-4">
+            Login Form
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="userName">User Name:*</label>
+                <input 
+                    type="text" 
+                    class="form-control mx-2" 
+                    placeholder="Enter user name" 
+                    id="userName"
+                    name="userName" 
+                    formControlName="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input 
+                    type="password" 
+                    class="form-control mx-2" 
+                    placeholder="Enter password" 
+                    id="password"
+                    name="password"
+                    formControlName="password">
+            </div>
+        </div>    
+        <div class="card-footer">
+            <button 
+                type="submit" 
+                class="btn btn-primary">Register</button>
+        </div>
+        </form>
+    </div>
+    </div>
