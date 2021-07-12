@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Nominee } from '../nominee';
 
 @Component({
   selector: 'app-list-nominee',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListNomineeComponent implements OnInit {
 
+  @Input() nomineesList!: Nominee[]
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.nomineesList)
+  }
+
+  remove(nomineeId: number){
+    console.log(nomineeId);
   }
 
 }

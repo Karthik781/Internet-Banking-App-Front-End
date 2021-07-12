@@ -1,1 +1,129 @@
-<p>add-account works!</p>
+<div class="container">
+    <div class="card mt-4">
+        <form [formGroup]="accountForm" (ngSubmit)="createAccount()">
+            <div class="card-header bg-transparent border-primary h4">
+                Account application Form
+            </div>
+            <div class="card-body">
+            <div class="form-group">            
+                <div bg-transparent border-primary class="card-body">
+                    <label for="accountType">Account Type:</label>
+                    <select #myInput (input)="myInput" class="form-control" id="accountType" name="accountType"
+                        formControlName="accountType">
+                        <option value="1">savings account</option>
+                        <option value="2">term account</option>
+                    </select>
+                    <span *ngIf="accountForm.get('accountType')?.invalid && (accountForm.get('accountType')?.dirty || accountForm.get('accountType')?.touched)"
+                    class="text-danger small">
+                    Required!
+                        </span>
+                </div>
+            </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="password">Balance:</label>
+                    <input type="text" class="form-control mx-2" placeholder="Enter balance" id="balance" name="balance"
+                        formControlName="balance">
+                    <small id="balance" class="text-muted">
+                        Minimum balance must be 1000 for savings account!
+                    </small>
+                    <span *ngIf="accountForm.get('balance')?.invalid && (accountForm.get('balance')?.dirty || accountForm.get('balance')?.touched)"
+                    class="text-danger small">
+                    Required!
+                        </span>
+                </div>
+            </div>
+            <div *ngIf="myInput.value == '2'" class="form-group">
+                <div class="card-body">
+                    <label for="password">Term amount:</label>
+                    <input type="text" class="form-control mx-2" placeholder="Enter amount" id="amount" name="amount"
+                        formControlName="amount">
+                    <small id="balance" class="text-muted">
+                        Minimum balance must be Rs.5000 for Term account!
+                    </small>
+                </div>
+            </div>
+
+            <div *ngIf="myInput.value == '2'" class="form-group">
+                <div class="card-body">
+                    <label for="password">No of months:</label>
+                    <input type="text" class="form-control mx-2" placeholder="Enter months" id="months" name="months"
+                        formControlName="months">
+                    <small id="balance" class="text-muted">
+                        6 months minimum!
+                    </small>
+                </div>
+            </div>
+            <!-- <app-add-nominee  [nominee]="nomineeForm" ></app-add-nominee> -->
+            <div class="card-header h5">Add Nominees</div>
+            <div formArrayName="nominees" *ngFor="let item of accountForm.controls.nominees.value; let i = index">
+                <div [formGroupName]="i">
+                    <!-- <app-add-nominee  [nominee]="nomineeForm" ></app-add-nominee> -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label >Nominee Name:</label>
+                            <input type="text" class="form-control mx-2 " id="nomineeName" name="nomineeName"
+                                formControlName="nomineeName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="govtId">Govt Id:</label>
+                            <input type="text" class="form-control mx-2" id="govtId" name="govtId"
+                                formControlName="govtId">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="govtIdType">Govt Id type:</label>
+                            <div>
+                                <select class="form-muted mx-2 dropdown-toggle" id="govtIdType" name="govtIdType"
+                                    formControlName="govtIdType">
+                                    <option disabled> -select-</option>
+                                    <option> Aadhar</option>
+                                    <option>Pan card</option>
+                                    <option>Visa card</option>
+                                    <option>Voter Card</option>
+                                    <option>Driving Lisence</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNo">Phone no:</label>
+                            <input type="number" class="form-control mx-2" id="phoneNo" name="phoneNo"
+                                formControlName="phoneNo">
+                        </div>
+                        <div class="form-group">
+                            <label for="relation">Relation:</label>
+                            <!--  <input type="text" class="form-control mx-2 " id="relation" name="relation"
+                             formControlName="relation">-->
+                            <div>
+                                <select class="form-muted mx-2 dropdown-toggle" id="relation" name="relation"
+                                    formControlName="relation">
+                                    <option disabled> -select-</option>
+                                    <option> Spouse</option>
+                                    <option>Mother</option>
+                                    <option>Father</option>
+                                    <option>Child</option>
+                                    <option>Relative</option>
+                                    <option>Friend </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- <button type="button" (click)="addNext()">Add Next</button> -->
+            <div class="card-footer">
+                <button type="button" (click)="addNext()" class="btn btn-info" [disabled]='false'> add more nominees
+                </button>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+        </form>
+    </div>
+</div>

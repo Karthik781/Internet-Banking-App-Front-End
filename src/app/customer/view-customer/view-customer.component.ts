@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Account } from 'src/app/account/account';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
@@ -12,6 +13,7 @@ import { CustomerService } from '../customer.service';
 export class ViewCustomerComponent implements OnInit {
 
   customer!: Customer; 
+  accountsList: Account[] = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class ViewCustomerComponent implements OnInit {
     .subscribe((data) => {
       console.log(data);
       this.customer = data;
+      this.accountsList = data.accounts;
     })
   }
 

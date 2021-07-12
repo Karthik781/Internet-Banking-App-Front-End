@@ -1,1 +1,78 @@
-<p>edit-beneficiary works!</p>
+<div class="container col-md-6"  > 
+    <div class= " card d-flex justify-content-center">
+            <form [formGroup]="beneficiary" (ngSubmit)="editBeneficiary()" >
+                <div class="h3 card-header bg-success text-white">
+                    Edit Beneficiary Form
+                </div>  
+        
+                <div class="form-group  mx-2">
+                    <label for="beneficiaryName">Beneficiary Name:</label>
+                    
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="beneficiaryName"
+                        name="beneficiaryName"
+                        formControlName="beneficiaryName">
+
+                    <span 
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.required"
+                          class = "text-danger small">
+                          beneficiary name is mandatory
+                   </span>    
+                    <span
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.minlength"
+                          class = "text-danger small">
+                          beneficiary name should be minimum of 3 characters!
+                    </span> 
+
+                    <span
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.maxlength"
+                          class = "text-danger small">
+                          beneficiary name should be maximum of 15 characters!
+                    </span> 
+
+                </div>
+                                                                           
+                <div class="form-group  mx-2">
+                    <label for= "beneficiaryAccountNumber"> Beneficiary Account Number:</label>
+                    <input 
+                        type="type" 
+                        class="form-control "
+                        id="beneficiaryAccountNumber"
+                        name="beneficiaryAccountNumber"
+                        formControlName="beneficiaryAccountNumber">
+                </div>
+            
+                <div class="form-group  mx-2">
+                    <label for="ifsc">IFSC:</label>
+                    <input 
+                        type="type" 
+                        class="form-control "
+                        id="ifsc"
+                        name="ifsc"
+                        formControlName="ifsc">
+                
+                </div>
+                
+                <div class="form-group mx-2" >
+                    <label for="accountType">Account Type:</label>
+                    <select class="form-control" id="accountType" name="accountType" formControlName="accountType">
+                        <option value = "Salary Account" >Salary Account</option>
+                        <option value = "Savings Account">Savings Account</option>
+                        <option value = "Term Account">Term Account</option>
+                        
+                      </select>
+                </div>
+          
+                <div class = "card-footer">
+                    <button 
+                        type="submit" 
+                        class="btn btn-outline-success"
+                        [disabled] = "!beneficiary.valid">Save
+                    </button>
+                </div>
+                
+          </form>
+     </div>
+</div> 

@@ -1,1 +1,15 @@
-<p>list-nominee works!</p>
+<div class="container">
+    <h5 class="card-title">Nominees</h5>
+    <div *ngFor = "let nominee of nomineesList" class="row">
+      <div  class="col">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Name: {{nominee.nomineeName}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Relation: {{nominee.relation}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">IFSC: {{nominee.phoneNo}}</h6>
+            <a (click) = "remove(nominee.nomineeId)" class="btn btn-outline-danger">Remove </a> 
+            <!-- <a href="#" class="card-link">Card link</a>
+            <a [routerLink]= "['/view-account', account.accountId]" class="card-link">View Account     </a> -->
+           </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,26 @@
+
+<div class="container table-responsive py-5"> 
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Transaction ID</th>
+          <th scope="col">Amout</th>
+          <th scope="col">transactionType</th>
+          <th scope="col">Time</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let transaction of transactionList; let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{transaction.transactionId}}</td>
+          <td>{{transaction.amount}}</td>
+          <td>{{transaction.transactionType}}</td>
+          <td>{{transaction.transactionDateTime | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td>{{transaction.transactionStatus}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    

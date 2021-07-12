@@ -1,1 +1,18 @@
-<p>list-account works!</p>
+<div class="container">
+    <div class="row">
+      <div  class="col">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title item-card-title">Account</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Account number: {{account.accountId}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Balance: {{account.balance}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Date of joining: {{account.dateOfJoining}}</h6>
+            <p class="card-text">Some the bulk of the card's content.</p>
+            <!-- <a href="#" class="card-link">Card link</a> -->
+            <a [routerLink]= "['/view-account', account.accountId]" class="card-link">View Account 
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

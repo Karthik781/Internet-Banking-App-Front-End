@@ -1,18 +1,18 @@
-<div class="container">
+<div class="container register">
     <div class="card mt-4">
-        <!-- <form *ngIf [formGroup] = "registorForm" (ngSubmit)="register()"> 
-        <div class="card-header bg-primary text-white display-4">
-            Register Form
-        </div>
+        <form *ngIf = "regType == 1" [formGroup] = "adminForm" (ngSubmit)="registerAdmin()"> 
+            <div class="card-header border-bottom border-primary">
+                Admin Registration Form
+            </div>
         <div class="card-body">
-            <div class="form-group">
-                <label for="userName">User Name:*</label>
+            <div class="form-group  mx-2">
+                <label for="username">User Name:*</label>
                 <input 
                     type="text" 
                     class="form-control mx-2" 
                     placeholder="Enter user name" 
-                    id="userName"
-                    name="userName" 
+                    id="username"
+                    name="username" 
                     formControlName="username">
             </div>
             <div class="form-group">
@@ -25,15 +25,46 @@
                     name="password"
                     formControlName="password">
             </div>
+    
+            <div class="form-group">
+                <label for="adminName">Name:</label>
+                <input 
+                    type="text" 
+                    class="form-control mx-2" 
+                    placeholder="Enter password" 
+                    id="adminName"
+                    name="adminName"
+                    formControlName="adminName">
+            </div>
+            <div class="form-group">
+                <label for="adminContact">Phone No:</label>
+                <input 
+                    type="text" 
+                    class="form-control mx-2" 
+                    placeholder="Enter password" 
+                    id="adminContact"
+                    name="adminContact"
+                    formControlName="adminContact">
+            </div>
+            <div class="form-group">
+                <label for="adminEmailId">Email:</label>
+                <input 
+                    type="email" 
+                    class="form-control mx-2" 
+                    placeholder="Enter password" 
+                    id="adminEmailId"
+                    name="adminEmailId"
+                    formControlName="adminEmailId">
+            </div>
         </div>    
         <div class="card-footer">
             <button 
                 type="submit" 
                 class="btn btn-primary">Register</button>
         </div>
-        </form> -->
-        <form [formGroup] = "registorForm" (ngSubmit)="register()"> 
-        <div class="card-header bg-primary text-white display-4">
+        </form>
+        <form *ngIf = "regType == 0" [formGroup] = "customerForm" (ngSubmit)="registerCustomer()"> 
+        <div class="card-header bg-primary text-white">
             Customer Register Form
         </div>
         <div class="card-body">
@@ -46,6 +77,10 @@
                     id="userName"
                     name="userName" 
                     formControlName="username">
+                    <span *ngIf="customerForm.get('username')?.invalid && (customerForm.get('username')?.dirty || customerForm.get('username')?.touched)"
+                    class="text-danger small">
+                    Username must be atleast 4 characters!
+                        </span>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -56,6 +91,10 @@
                     id="password"
                     name="password"
                     formControlName="password">
+                    <span *ngIf="customerForm.get('password')?.invalid && (customerForm.get('password')?.dirty || customerForm.get('password')?.touched)"
+                    class="text-danger small">
+                    Password must be strong!
+                    </span>
             </div>
             <div class="form-group">
                 <label for="customerName">Customer Name:</label>
@@ -66,6 +105,10 @@
                     id="customerName"
                     name="customerName"
                     formControlName="customerName">
+                    <span *ngIf="customerForm.get('customerName')?.invalid && (customerForm.get('customerName')?.dirty || customerForm.get('customerName')?.touched)"
+                    class="text-danger small">
+                         Name must contain alteast 3 characters!
+                    </span>
             </div>
             <div class="form-group">
                 <label for="phoneNo">Phone No:</label>
@@ -76,6 +119,10 @@
                     id="phoneNo"
                     name="phoneNo"
                     formControlName="phoneNo">
+                    <span *ngIf="customerForm.get('phoneNo')?.invalid && (customerForm.get('phoneNo')?.dirty || customerForm.get('phoneNo')?.touched)"
+                    class="text-danger small">
+                         Phone number must start with 6-9 and be 10 digits!
+                    </span>
             </div>
             <div class="form-group">
                 <label for="emailId">Email:</label>
@@ -86,6 +133,10 @@
                     id="emailId"
                     name="emailId"
                     formControlName="emailId">
+                    <span *ngIf="customerForm.get('emailId')?.invalid && (customerForm.get('emailId')?.dirty || customerForm.get('emailId')?.touched)"
+                    class="text-danger small">
+                         enter valid email!
+                    </span>
             </div>
             <div class="form-group">
                 <label for="age">Age:</label>
@@ -96,18 +147,11 @@
                     id="age"
                     name="age"
                     formControlName="age">
+                    <span *ngIf="customerForm.get('age')?.invalid && (customerForm.get('age')?.dirty || customerForm.get('age')?.touched)"
+                    class="text-danger small">
+                         Age must be atleast 18!
+                    </span>
             </div>
-            <!-- <div class="form-group">
-                <label for="gender">gender:</label>
-                <input 
-                    type="text" 
-                    class="form-control mx-2" 
-                    placeholder="Enter gender" 
-                    id="gender"
-                    name="gender"
-                    formControlName="gender">
-            </div> -->
-
             <div class="form-group">
                 <label for="gender">Gender:</label>
                 <select class="form-control" id="gender" name="gender"  formControlName="gender">
@@ -115,13 +159,19 @@
                   <option>female</option>
                   <option>other</option>
                 </select>
+                <span *ngIf="customerForm.get('gender')?.invalid && (customerForm.get('gender')?.dirty || customerForm.get('gender')?.touched)"
+                class="text-danger small">
+                     gender required
+                </span>
             </div>
         </div>    
         <div class="card-footer">
             <button 
                 type="submit" 
+                [disabled]="!customerForm.valid"
                 class="btn btn-primary">Register</button>
         </div>
         </form>
+        <button *ngIf = "regType == 0" type="button" (click) = "openAdminForm()" class="btn btn-link">register as admin</button>
     </div>
 </div>

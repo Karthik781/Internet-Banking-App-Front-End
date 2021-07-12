@@ -1,1 +1,22 @@
-<p>list-beneficiary works!</p>
+<div class="container">
+    <h3 class="card-title">beneficiaries</h3>
+    <div *ngIf = "errMsg!='' ">
+      {{errMsg}}
+    </div>
+    <div *ngFor = "let beneficiary of beneficiaryList" class="row">
+      <div  class="col">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Name: {{beneficiary.beneficiaryName}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Account Number: {{beneficiary.beneficiaryAccountNumber}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">IFSC: {{beneficiary.ifsc}}</h6>
+            <div class="row justify-content-between" >
+              <a [routerLink]= "['/view-beneficiary', beneficiary.beneficiaryId]" class="col-6 col-sm-3 btn btn-sm btn-outline-danger">View </a>
+              <a [routerLink]= "['/edit-beneficiary', beneficiary.beneficiaryId]" class="col-6 col-sm-3 btn btn-sm btn-outline-danger">Edit </a>
+              <a (click) = "remove(beneficiary.beneficiaryId)" class="col-6 col-sm-3 btn btn-sm btn-outline-danger">Remove </a>
+            </div>
+            <!-- <a href="#" class="card-link">Card link</a> -->
+            <!-- <a [routerLink]= "['/view-account', account.accountId]" class="card-link">View Account     </a> -->
+          </div>
+      </div>
+    </div>
+  </div>

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../users/user';
 import { Customer } from '../customer/customer';
+import { AuthResponse } from './auth-response';
+import { Admin } from '../admin/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,11 @@ export class LoginService {
     return this.http.post<User>(this.baseUrl + '/customer/create', customerData);
   }
 
-  login(userData: User): Observable<any>{
-    return this.http.post<User>(this.baseUrl + '/authenticate', userData);
+  login(userData: User): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(this.baseUrl + '/authenticate', userData);
+  }
+
+  registerAdmin(adminData: Admin): Observable<Admin>{
+    return this.http.post<Admin>(this.baseUrl + "/admin/create", adminData)
   }
 }

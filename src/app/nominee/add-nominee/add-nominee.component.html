@@ -1,1 +1,102 @@
-<p>add-nominee works!</p>
+<div class="container">
+  <div class="card mt-4">
+      <!-- <form (submit)="addProduct()"> -->
+      <form [formGroup]="nominee" (ngSubmit)="addNominee()">
+          <!-- this will not submit the form-->
+          <div class="text-white display-4" style="background-color:rgb(120, 47, 216)">
+              Add nominee 
+          </div>
+          <div class="card-body">
+              <div class="form-group">
+                  <label for="nomineeName">Nominee Name:</label>
+                  <input type="text" class="form-control mx-2 " id="nomineeName" name="nomineeName"
+                  formControlName="nomineeName">
+                  <span *ngIf=" nominee.get('nomineeName')?.touched &&  nominee.get('nomineeName')?.errors?.required " 
+                   class="text-danger small">
+                       nominee name is mandotary!
+                   </span>
+                   <span *ngIf=" nominee.get('nomineeName')?.touched &&  nominee.get('nomineeName')?.errors?.minlength " 
+                   class="text-danger small">
+                       nominee name should be minimun 3 characters!
+                   </span>
+                   <span *ngIf=" nominee.get('nomineeName')?.touched &&  nominee.get('nomineeName')?.errors?.maxlength " 
+                   class="text-danger small">
+                       nominee name can't exceed more than 15 characters!
+                   </span>
+              </div> 
+
+              <div class="form-group">
+                  <label for="govtId">Govt Id:</label>
+                  <input type="text" class="form-control mx-2" id="govtId" name="govtId"
+                  formControlName="govtId">
+                  <span *ngIf=" nominee.get('govtId')?.touched &&  nominee.get('govtId')?.errors?.required " 
+                  class="text-danger small">
+                      govtId is mandotary!
+                  </span>
+                  <span *ngIf=" nominee.get('govtId')?.touched &&  nominee.get('govtId')?.errors?.maxlength " 
+                   class="text-danger small">
+                       govtId can't exceed more than 15 characters!
+                   </span>
+
+              </div>
+
+              <div class="form-group">
+                  <label for="govtIdType">Govt Id type:</label>
+                      <div>
+                          <select class="form-muted mx-2 dropdown-toggle" id="govtIdType" name="govtIdType"  formControlName="govtIdType">
+                                  <option disabled > -select-</option>
+                                  <option > Aadhar</option>
+                                  <option >Pan card</option>
+                                  <option >Visa card</option>
+                                  <option >Voter Card</option>
+                                  <option >Driving Lisence</option>
+                              </select>
+                              <span *ngIf=" nominee.get('govtIdType')?.touched &&  nominee.get('govtIdType')?.errors?.required " 
+                              class="text-danger small"><br>
+                               Govt id type is mandotary!
+                              </span>
+                      </div>
+              </div>
+              <div class="form-group">
+                  <label for="phoneNo">Phone no:</label>
+                  <input type="number" class="form-control mx-2" id="phoneNo" name="phoneNo"
+                  formControlName="phoneNo">
+                  <span *ngIf=" nominee.get('phoneNo')?.touched &&  nominee.get('phoneNo')?.errors?.required " 
+                   class="text-danger small">
+                       phone no is mandotary!
+                   </span>
+                   <span *ngIf=" nominee.get('phoneNo')?.errors?.pattern " 
+                   class="text-danger small">
+                       phone no is not valid!
+                   </span>
+              </div>
+              <div class="form-group">
+                  <label for="relation">Relation:</label>
+                <!--  <input type="text" class="form-control mx-2 " id="relation" name="relation"
+                   formControlName="relation">-->
+                   <div>
+                      <select class="form-muted mx-2 dropdown-toggle" id="relation" name="relation"  formControlName="relation">
+                              <option  disabled > -select-</option>
+                              <option > Spouse</option>
+                              <option >Mother</option>
+                              <option >Father</option>
+                              <option >Child</option>
+                              <option >Relative</option>
+                              <option >Friend </option>
+                          </select>
+                          <span *ngIf=" nominee.get('relation')?.touched &&  nominee.get('relation')?.errors?.required " 
+                   class="text-danger small"><br>
+                       nominee relation is mandotary!
+                   </span>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer">
+              <button type="submit" class="btn btn-info" style="background-color: gray;"
+              [disabled]='!nominee.valid' > add nominee
+              </button>
+          </div>
+
+      </form>
+  </div>
+</div>

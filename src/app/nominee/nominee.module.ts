@@ -4,6 +4,7 @@ import { AddNomineeComponent } from './add-nominee/add-nominee.component';
 import { EditNomineeComponent } from './edit-nominee/edit-nominee.component';
 import { ListNomineeComponent } from './list-nominee/list-nominee.component';
 import { ViewNomineeComponent } from './view-nominee/view-nominee.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,9 @@ import { ViewNomineeComponent } from './view-nominee/view-nominee.component';
     ViewNomineeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AddNomineeComponent,

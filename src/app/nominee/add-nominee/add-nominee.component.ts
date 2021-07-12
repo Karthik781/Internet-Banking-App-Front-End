@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-nominee',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNomineeComponent implements OnInit {
 
-  constructor() { }
+  @Input() nominee!: FormGroup;
+
+  constructor() { 
+    this.nominee = new FormGroup({
+      nomineeId: new FormControl(),
+      nomineeName : new FormControl(),
+      govtId: new FormControl(),
+      govtIdType : new FormControl(),
+      phoneNo: new FormControl(),
+      relation : new FormControl()
+    })
+  }
 
   ngOnInit(): void {
   }
 
+  
+
+  addNominee(){
+    console.log(this.nominee.value)
+  }
 }

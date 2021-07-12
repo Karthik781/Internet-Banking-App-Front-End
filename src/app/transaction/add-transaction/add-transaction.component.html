@@ -1,1 +1,137 @@
-<p>add-transaction works!</p>
+<br/>
+<div class="container-sm">
+    <div class="row">
+        <div class="col">
+            <button (click)= "toggleTransactionType()" class="btn btn-primary">Send to Account </button>
+        </div>
+        <div class="col">
+            <button (click)= "toggleTransactionType()" class="btn btn-primary">Send to beneficiary </button>
+        </div>
+    </div>
+<div class="card mt-4">
+    <form *ngIf = "transactionType == 0"  [formGroup] = "transactionForm" (ngSubmit)="sendToAccount()"> 
+        <div class="card-header bg-primary text-white">Send money to account within bank</div>
+        <div class="form-group">
+            <label for="receiverId">Receiver Account No::</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter Account No" 
+                id="receiverId"
+                name="receiverId"
+                formControlName="receiverAccountId">
+              
+        </div>
+        <div class="form-group">
+            <label for="amounts">Amount:</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter Amount" 
+                id="amounts"
+                name="amount"
+                formControlName="amount">
+              
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter Username" 
+                id="username"
+                name="username"
+                formControlName="username">
+              
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input 
+                type="password" 
+                class="form-control mx-2" 
+                placeholder="Enter Password" 
+                id="password"
+                name="password"
+                formControlName="password">
+              
+        </div>
+        <div class="card-footer">
+            <button 
+                type="submit" 
+                class="btn btn-primary">Confirm</button>
+        </div>
+        <div *ngIf = "errMsg!='' " class="card-footer text-danger">
+            {{errMsg}}
+        </div>
+    </form>
+      <!-- <div *ngIf = "transactionStatus ==1"  class="card mt-4">
+                <h4> Transaction Successful!</h4>
+                <h5>{{accountData.transactions[0].amount}}</h5>
+                <h5></h5>
+                <h5></h5>
+
+      </div> -->
+    <form *ngIf = "transactionType == 1"  [formGroup] = "transBenForm" (ngSubmit)="sendToBeneficiary()"> 
+        <div class="form-group">
+                <div formGroupName="beneficiary">
+                <select class="form-muted mx-2 dropdown-toggle" id="beneficiaryId" name="beneficiaryId"
+                formControlName="beneficiaryId">
+                    <option *ngFor="let beneficiary of benefeciaryList" [value]="beneficiary.beneficiaryId">
+                      {{beneficiary.beneficiaryName}}
+                    </option>
+                </select>
+                </div>
+              
+        </div>
+        <div class="form-group">
+            <label for="amounts">Amount:</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter Amount" 
+                id="amounts"
+                name="amount"
+                formControlName="amount">
+              
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter Username" 
+                id="username"
+                name="username"
+                formControlName="username">
+              
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input 
+                type="password" 
+                class="form-control mx-2" 
+                placeholder="Enter Password" 
+                id="password"
+                name="password"
+                formControlName="password">
+              
+        </div>
+        <div class="card-footer">
+            <button 
+                type="submit" 
+                class="btn btn-primary">Confirm</button>
+ 
+                 <!-- <a type="submit" class="btn btn-primary ">Proceed Payment  <i class="material-icons">
+                    send_to_mobile
+                 </i></a>  -->
+        </div>
+    </form>
+      <!-- <div *ngIf = "transactionStatus ==1"  class="card mt-4">
+                <h4> Transaction Successful!</h4>
+                <h5>{{accountData.transactions[0].amount}}</h5>
+                <h5></h5>
+                <h5></h5>
+
+      </div> -->
+</div>
+</div>

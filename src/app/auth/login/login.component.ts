@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserDataService } from 'src/app/shared/user-data-service';
+import { UserType } from 'src/app/shared/user-type';
 import { AuthService } from '../auth.service';
 import { LoginService } from '../login.service';
 
@@ -21,12 +23,13 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private route: ActivatedRoute,
-              private authService: AuthService) { 
+              private authService: AuthService,
+              private userDataService: UserDataService) { 
 
                 this.loginForm = new FormGroup({            
-                  username: new FormControl(),
-                  password: new FormControl(),
-                  type: new FormControl('ADMIN'),
+                  username: new FormControl('', [Validators.required]),
+                  password: new FormControl('', [Validators.required]),
+                  type: new FormControl(),
                 });
 
               }
@@ -40,11 +43,16 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value)
       .subscribe((data) => {
         console.log(data);
+        this.userDataService.userInfo = data;
         this.authService.storeUserDetails(JSON.stringify(data));
 
         console.log( this.authService.retrieveUserDetails());
+        if(data.user.type === UserType.CUSTOMER){
+          this.router.navigate(['view-customer', {id: data.user.userId}])
+        }else if(data.user.type === UserType.ADMIN){
+          this.router.navigate(['admin-dashboard'])
+        }
 
-        this.router.navigate(['view-customer', {id: data.user.userId}])
       },
       (error) => {
           console.log(error);

@@ -1,0 +1,45 @@
+ 
+.panel-title a:after {
+    font-family:Fontawesome;
+    content:'\f077';
+    float:right;
+    font-size:10px;
+    font-weight:300;
+}
+.panel-title a.collapsed:after {
+    font-family:Fontawesome;
+    content:'\f078';
+}
+
+
+/* .transaction{
+
+} */
+
+mat-h6, .mat-typography h6 {
+    font: 16px;
+}
+
+.account {
+    margin-top: 3.5em;
+}
+
+.card{
+    /* margin-bottom: 1em; */
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    border-radius: 0.15rem;
+    margin: 10px;
+}
+
+.form-control {
+    max-width: 350px
+}
+
+.card-title {
+    margin-bottom: 0.0rem;
+    padding: 0.75em;
+}
+
+.card-body {
+    background: #eefbdf;
+}

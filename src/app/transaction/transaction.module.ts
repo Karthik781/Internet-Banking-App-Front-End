@@ -4,6 +4,8 @@ import { AddTransactionComponent } from './add-transaction/add-transaction.compo
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 import { ListTransactionComponent } from './list-transaction/list-transaction.component';
 import { ViewTransactionComponent } from './view-transaction/view-transaction.component';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +17,9 @@ import { ViewTransactionComponent } from './view-transaction/view-transaction.co
     ViewTransactionComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule 
   ],
   exports: [
     AddTransactionComponent,

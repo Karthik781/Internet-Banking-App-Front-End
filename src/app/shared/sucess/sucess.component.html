@@ -1,0 +1,13 @@
+<br/>
+<div class="container justify-content-center">
+    <div class="card text-white bg-success mb-3" style="max-width: 35rem;">
+        <div class="card-header">Transaction Successful!!!</div>
+        <div class="card-body">
+          <h4 class="card-title">Amount: {{transaction.amount}}</h4>
+          <h4 class="card-title">ID: {{transaction.transactionId}}</h4>
+          <h4 class="card-title">Time: {{transaction.transactionDateTime | date: 'dd/MM/yyyy h:mm:ss a'}}</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+      <button (click) = "loadPrevious()" class="btn btn-primary">Send more money</button>
+</div>

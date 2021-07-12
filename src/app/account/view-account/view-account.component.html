@@ -1,1 +1,122 @@
-<p>view-account works!</p>
+<br />
+<div class=" container-sm">
+    <div class="card account">
+        <h4 class="card-title border-bottom border-primary ">Account No: {{accountData.accountId}}</h4>
+        <div class=" card-body">
+            <h5 class="card-subtitle mb-2">Balance: {{accountData.balance}}</h5>
+            <h5 class="card-subtitle mb-2">Date of Creation: {{accountData.dateOfJoining}}</h5>
+            <h5 class="card-subtitle mb-2">Interest: {{accountData.interestRate}} %</h5>
+            <p class="card-subtitle mb-2">It's a broader card with text below as a natural lead-in to extra content.
+                This content is a little longer.</p>
+        </div>
+    </div>
+
+    <div>
+        <div class="card transaction">
+            <h3 class="card-title border-bottom border-primary">Transactions</h3>
+            <div class="card-body">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
+                                    href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Deposit Money
+                                </a> </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                            aria-labelledby="headingOne">
+                            <div class="card mt-4">
+                                <form [formGroup]="depositForm" (ngSubmit)="deposit()">
+                                    <div class="form-group">
+                                        <label for="amount">Amount:</label>
+                                        <input type="text" class="form-control mx-2" placeholder="Enter Amount"
+                                            id="amount" name="amount" formControlName="amount">
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Add Money</button>
+                                    </div>
+                                </form>
+                                <div *ngIf="transactionStatus ==1" class="card text-white bg-success mb-3"
+                                    style="max-width: 18rem;">
+                                    <div class="card-header">Transaction Successful!</div>
+                                    <div class="card-body ">
+                                        <h5 class="card-title text-primary">Amount {{accountData.transactions[0].amount
+                                            | currency:'INR'}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse"
+                                        data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseTwo"> Withdraw Money </a> </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                aria-labelledby="headingTwo">
+                                <div class="card mt-4">
+                                    <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+                                        <div class="form-group">
+                                            <label for="amounts">Amount:</label>
+                                            <input type="text" class="form-control mx-2" placeholder="Enter Amount"
+                                                id="amounts" name="amount" formControlName="amount">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">Username:</label>
+                                            <input type="text" class="form-control mx-2" placeholder="Enter Username"
+                                                id="username" name="username" formControlName="username">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password:</label>
+                                            <input type="password" class="form-control mx-2"
+                                                placeholder="Enter Password" id="password" name="password"
+                                                formControlName="password">
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Confirm</button>
+                                        </div>
+                                    </form>
+
+                                    <div *ngIf="transactionStatus ==1" class="card text-white bg-success mb-3"
+                                        style="max-width: 18rem;">
+                                        <div class="card-header">Transaction Successful!</div>
+                                        <div class="card-body ">
+                                            <h5 class="card-title text-primary">Amount
+                                                {{accountData.transactions[0].amount | currency:'INR'}}</h5>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h6">
+                            <a [routerLink]="['/view-transactions', accountData.accountId ]">View all transactions </a>
+                        </div>
+                        <div class="col">
+                            <div class="row h6">
+                                <a [routerLink]="['/transaction', accountData.accountId ]">Send Money </a>
+                                <span class="material-icons">
+                                    swap_horiz
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card beneficiary">
+                <app-list-beneficiary [beneficiaryList]="beneficiaries"></app-list-beneficiary>
+
+                <div class="col">
+                    <a [routerLink]="['/add-beneficiary']" [queryParams]="{id : accountData.accountId }"
+                        class="btn btn-link ">Add new beneficiary </a>
+                </div>
+            </div>
+            <div class="card nominee">
+                <app-list-nominee [nomineesList]="nominees"></app-list-nominee>
+            </div>
+        </div>

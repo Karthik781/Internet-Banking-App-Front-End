@@ -1,1 +1,78 @@
-<p>add-beneficiary works!</p>
+<div class="container" > 
+    <div class= "card mt-4">
+        <div class="card-header border-bottom border-primary">
+            Add Beneficiary Form
+        </div>  
+            <form [formGroup]="beneficiary" (ngSubmit)="addBeneficiary()">
+        
+                <div class="form-group  mx-2">
+                    <label for="beneficiaryName">Beneficiary Name:</label>
+                    
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="beneficiaryName"
+                        name="beneficiaryName"
+                        formControlName="beneficiaryName">
+
+                    <span 
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.required"
+                          class = "text-danger small">
+                          beneficiary name is mandatory
+                   </span>    
+                    <span
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.minlength"
+                          class = "text-danger small">
+                          beneficiary name should be minimum of 3 characters!
+                    </span> 
+
+                    <span
+                          *ngIf = "beneficiary.get('beneficiaryName')?.touched && beneficiary.get('beneficiaryName')?.errors?.maxlength"
+                          class = "text-danger small">
+                          beneficiary name should be maximum of 15 characters!
+                    </span> 
+
+                </div>
+                                                                           
+                <div class="form-group  mx-2">
+                    <label for= "beneficiaryAccountNumber"> Beneficiary Account Number:</label>
+                    <input 
+                        type="type" 
+                        class="form-control "
+                        id="beneficiaryAccountNumber"
+                        name="beneficiaryAccountNumber"
+                        formControlName="beneficiaryAccountNumber">
+                </div>
+            
+                <div class="form-group  mx-2">
+                    <label for="ifsc">IFSC:</label>
+                    <input 
+                        type="type" 
+                        class="form-control "
+                        id="ifsc"
+                        name="ifsc"
+                        formControlName="ifsc">
+                
+                </div>
+                
+                <div class="form-group mx-2" >
+                    <label for="accountType">Account Type:</label>
+                    <select class="form-control" id="accounttype" name="accounttype" formControlName="accountType">
+                        <option>Salary Account</option>
+                        <option>Savings Account</option>
+                        <option>Term Account</option>
+                        
+                      </select>
+                </div>
+          
+                <div class = "card-footer">
+                    <button 
+                        type="submit" 
+                        class="btn btn-outline-success"
+                        [disabled] = "!beneficiary.valid">Add Beneficiary
+                    </button>
+                </div>
+                
+          </form>
+     </div>
+</div> 

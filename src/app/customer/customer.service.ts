@@ -15,26 +15,35 @@ export class CustomerService {
   constructor(private http: HttpClient,
     private authService: AuthService) { }
 
-  getHttpOptions() {
-    let httpOptions = {};
-    let userData: any = '';
-    userData = this.authService.retrieveUserDetails();
-    console.log("user jwt:" + userData);
-    if (userData != null) {
-      let token = JSON.parse(userData).jwt;
-      console.log("token:" + token);
-      httpOptions = {
+    getHttpOptions(){
+      let httpOptions = {};
+      let userData: any = '';
+      userData = this.authService.retrieveUserDetails();
+      if(userData!=null){
+        let token = JSON.parse(userData).jwt;
+        console.log("token:" + token);
+        httpOptions =  {
         headers: new HttpHeaders({
           'content-type': 'application/json',
           'Authorization': 'Bearer ' + token
         })
       }
+      }
+     return httpOptions;
     }
-    return httpOptions;
-  }
 
   getCustomerById(customerId : number): Observable<Customer>{
+    let ops =this.getHttpOptions();
+    console.log(ops);
     return this.http.get<Customer>(this.baseUrl + "/uid/" + customerId ,this.getHttpOptions());
+  }
+
+  getCustomerBycustomerId(customerId: number): Observable<Customer>{
+    return this.http.get<Customer>(this.baseUrl + "/" + customerId, this.getHttpOptions())
+  }
+
+  editCustomer(customer: Customer): Observable<Customer>{
+    return this.http.put<Customer>(this.baseUrl + "/update", customer, this.getHttpOptions())
   }
 
 }

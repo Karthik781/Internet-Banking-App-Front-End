@@ -1,13 +1,24 @@
+<br/>
 <div class="card">
-    <div class="card-header">
-      Featured
+    <div class="card-header row d-flex justify-content-between">
+      <div class="col h6">
+      Customer Details
     </div>
-    <div class="card-body">
-      <h5 class="card-title">Welcome {{customer.customerName}}</h5>
-      <h6 class="card-title">User Name: {{customer.username}}</h6>
-      <h6 class="card-title">Email: {{customer.emailId}}</h6>
-      <h6 class="card-title">Phone No: {{customer.phoneNo}}</h6>
-      <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-      <a href="#" class="btn btn-primary">Create new acount </a>
+      <div class="col">
+        <a  [routerLink] = "['/edit-customer', customer.userId]" type = "button"><span class="material-icons">
+          edit
+          </span></a>
+    </div>
+    </div>
+    <div class="card-body customer">
+      <h4 class="card-title ">Welcome {{customer.customerName}}</h4>
+      <h5 class="card-title">User Name: {{customer.username}}</h5>
+      <h5 class="card-title">Email: {{customer.emailId}}</h5>
+      <h5 class="card-title">Phone No: {{customer.phoneNo}}</h5>
+      <h5 class="card-title">Gender: {{customer.gender}}</h5>
+      <a a [routerLink] = "['/add-account', customer.customerId]" class="btn btn-primary">Create new acount </a>
+    </div>
+    <div *ngFor = "let acc of accountsList">
+      <app-list-account [account]="acc"></app-list-account>
     </div>
   </div>
